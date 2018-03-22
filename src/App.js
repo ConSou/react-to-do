@@ -33,12 +33,21 @@ handleChange(e){
   this.setState({newTodoDescription: e.target.value});
 }
 
+deleteTodo(index){
+  const deleteArr = this.state.todos.filter(e => e !== this.state.todos[index])
+  this.setState({todos: deleteArr});
+  //this.setState(this.state.todos = deleteArr);
+  //alert('delete has been clicked' + index);
+  //console.log(deleteArr)
+}
+
+
   render() {
     return (
       <div className="App">
         <ul>
           {this.state.todos.map( (todo, index) =>
-            <ToDo key={ index } description={todo.description} isComplete={todo.isComplete} toggleComplete={() => this.toggleComplete(index)}/>
+            <ToDo key={ index } description={todo.description} isComplete={todo.isComplete} toggleComplete={() => this.toggleComplete(index)} deleteTodo={() => this.deleteTodo(index)}/>
           )}
         </ul>
         <form onSubmit={(e) => this.handleSubmit(e)}>
